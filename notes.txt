@@ -1,0 +1,40 @@
+SASS
+
+npm i sass
+
+un fichier qui a vocation a être inclus dans d'autres fichiers commance par un _
+
+
+FONTAWESOME
+
+npm i --save @fortawesome/react-fontawesome@latest
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+npm i --save @fortawesome/free-brands-svg-icons
+
+Composant serveurs et clients  dans ue application Next
+
+
+par defaut dans Next un Composant est C. serveur
+
+un composnt qui est rendu directement côté serveur ===> on peut donc effectuer une requete api ou DB directement
+tout l'HTML est rendu côté serveur et il est envoyé tout sur le navigateur
+le composant devient async 
+
+on reduit un maximun la parti de composant client si on doit gérer une interaction
+un composant serveur inclus dans un composant composant devient composant client lui même
+pour le garder comme composant serveur il faut l'inclure comme composant enfant passé en props children
+
+CONTEXT react
+partager des données entre composants clients
+
+On joint un CONTEXT dans le composant commun
+
+createContext from react
+
+"use client"
+
+Variables d'environnement
+
+package server-only

@@ -1,0 +1,23 @@
+@import "variables";
+
+.container {
+  margin-top: 30px;
+
+  .genresContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .genre {
+      background-color: $primary-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 calc(20% - 20px);
+      border-radius: 10px;
+
+      p {
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+NEXT.JS
+application hybride
+=========> entre Application Serveur et Application Client
+==> UI React
+==> Système de routage
+==> Recuperation des données
+==> Client Side Rendering 
+==> Server Side Rendering
+==> Gestion des environnements (prod/dev)
+==> gestion d'une source des données ---> API ou BDD
+
+
+REACT nous servira à créer l'interface utilisateur
+NEXT nous servira pour avoir un Système de routage, authentification, Recuperation des données, internationalisation
+
+
+Par defaut avec Next les pages créées sont configurée pour du Server Side Rendering :
+    deux types de rendu coté Server
+    1) Static rendering (comportement par defaut)
+        executé au BUILD TIME (au lencament de l'application)
+    2) Dynamic rendering
+        executé au RUN TIME ( à la volée )
+
+
+
+COMPOSANTS SERVEURS
+    ===> interaction avec des infos sensibles
+    ===> interaction avec la BDD
+    ===> les composants sont pre-rendu : rendus côtés serveurs. Ils ne feront pas partie du bundle JS donnée au Client
+
+COMPOSANTS CLIENT
+    ===> utilisation des Hookes React
+    ===> composants en interaction avec l'utilisateur, gestion des evenements (onClick...)
+    ===> fourni au bundle JS côté Client
+
+    NEXT utilise le compilateur SWC (de JSX/TS à JS)
+    NEXT utilise le bundler TurboPack qui ressemble tous les fichiers compilés
+    NEXT bénéficie de la minification des fichiers 
+    NEXT effectue du code split
+
+
+
+INSTALLATION
+
+`npx create-next-app@latest`
+
+COMMANDES : 
+
+npm run dev ===> creation de developpemet next
+next build ===> commande pour préparer le code pour le serveur de production
+next start ===> commande pour lancer le serveur de production
+netx lint ===> executer eslint et faire toutes les vérifications de ESLINT
+
+
+
+ARCHITECTURE
+
+/public ---> tous les assets
+/src ---> tout le code, la logique de l'application
+/src/app ---> les routes et leur logique ===> chaque dossier dans app represent un segment de route. 
+Dans chaque sous-dossier de app il y aura un layout.js et page.js s'il s'agit d'une page un sous-dossier sera un sous segment de l'url
+global.css ---> regles generales css pour toutes l'application
+page.module.css ---> applicable uniquement au fichier page.js (les css module seront limités au scope du fichier dans lesquels ils sont importé)
+layout.js ---> le layout de base, la structure html principale commune à toutes les pages (il remplace le index.html)
+page.js ---> composant qui represente la page web (par defaut composant serveur)
+
+
+ANALYSE D'UNE REQUETE NETX.js
+
+
+REQUETE HTTP ---> SERVEUR NODE.js 
+
+
+segment statique et segment dynamique
+
+segment dynamique on nomme un sous-dossier par /product/[id]
+
+chaque page de segment dynamique importe par defaut des props params et searchParams
+==> params = le parametre de l'urt (id)
+==> searchParams = les query
+===> l'utilisation des searchParams désactive la possibilité d'utilisar le segment comme statique
+
+Error
+
+error.js ==> error boundary ==> composant qui detecte toute erreur generées par ses composants enfants. On y attache un composant de fallback qui constitue 
+une interface de remplacement en cas d'erreur
+not-found.js ==> gestion de l'erreur 404
+global-error.js ==> fonctionnement comme le error.js mais il faut le créer uniquement à la racine du dososier de routage pour gérer les erreurs generées par le Rootlayout
+Suspense boundary ==> loading.js  
+
+
+GROUPE DE routes
+
+nom entre parentheses (GROUPE_NAME)
+
+Liens et Redirection dans NEXT.js
+
+avec les balises <a></a> on a un rafraichissement total de la page
+
+utiliser le composant 
+===> Link de next/link quib permet de faire le rendu seulement des nouveaux commposant sans rendu pour les composant dejà monté
+===> Link permet d'utiliser la fonctionnalité de pre-fetch à l'affichage du Link dans la page il y a un pre-fetch des certaines ressources
+ de la page target avant même qu'on ait cliqué sur le link
+
+
+ Redirection
+ ===> utiliser la fonction redirect from next/navigation
+ redirect("/path")
+
+
+
+ useRouter from next/navigation
+Hook de React
+ à utiliser que dans des C. Client
+ const router = useRouter()
+ router.refresh() ==> declenche un re-render uniquement des composants serveur
+ router.prefetch("ROUTE_PATH")
+ router.push("ROUTE_PATH") ==> ajouterune route dans l'historique du navigateur
+ router.replace("ROUTE_PATH")==> remplacer une route dans l'historique du navigateur
+ router.back() ==> retour à la page précédente
+ router.forward() ==> aller à la page suivante
+
+
+ useParams et useSerachParams
+
+useSelectedLayoutSegment(s)
+récuperer la valeur d'un segment qui est just en dessous de son utilisation
+==>utilisé pour créer un breadCrumb
+==> composant qui a vocation a ^tre utilisé depuis un commposant Client importé depuis un layoiut
+
+==> on récupère le segment actif inferieur
+
+usePathname ==> recuperer le chemin d'url dans lequel on se trouve dans l'applictaion
+
+
+
+ 
+

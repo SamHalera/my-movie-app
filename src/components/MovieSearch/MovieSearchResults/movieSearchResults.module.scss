@@ -1,0 +1,32 @@
+@import "variables";
+.searchResults {
+  position: absolute;
+  z-index: 2;
+  background-color: $whiteColor;
+  top: 45px;
+  padding: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: var(--monserrat-fonts);
+  .result {
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      p {
+        color: $secondary-color;
+      }
+    }
+    p {
+      font-size: 12px;
+      font-weight: 500;
+      color: black;
+      transition: all 0.4s ease-in-out;
+    }
+    img {
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
